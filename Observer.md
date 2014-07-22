@@ -22,7 +22,7 @@ You would use the Observer pattern when want a grain to allow subscribers to reg
 
 The subject (aka observed) grain
 
-The observer grain
+The observer 
 
 
 ## Collaborations
@@ -38,6 +38,8 @@ An observer implements this interface and then subscribe to notifications from a
 Methods on observer interfaces must be void since event messages are one-way. If the observer needs to interact with the observed grain as a result of a notification, it must do so by invoking normal methods on the observed grain.
 
 The observed grain type must expose a method to allow observers to subscribe to event notifications from a grain. In addition, it is usually convenient to expose a method that allows an existing subscription to be canceled. Grain developers may use the Orleans ObserverSubscriptionManager<T> class to simplify the subscriptions and notifications.
+
+If the observer is not a grain, it must first create a local C# class that implements the observer interface, then call a static method on the observer factory, CreateObjectReference(), to turn the C# object into a grain reference, which can then be passed to the subscription method on the notifying grain. 
 
 
 ## Sample Code
