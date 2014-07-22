@@ -27,8 +27,7 @@ namespace ObserverPattern
             IDoStuff grain = DoStuffFactory.GetGrain(0);
 
             var theObserver = new TheObserver();
-
-            var obj = ObserveFactory.CreateObjectReference(theObserver).Result; // factory form IObserve
+            var obj = ObserveFactory.CreateObjectReference(theObserver).Result; // factory from IObserve
 
             grain.SubscribeForUpdates(obj);
             
