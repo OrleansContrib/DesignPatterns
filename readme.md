@@ -6,7 +6,7 @@
 
 # Approximate Performance Expectations
 
-Using X-Large VMs (8 CPU Cores / 14 GB RAM) on Microsoft Azure, with one Silo per VM:
+Using X-Large VMs (8 CPU Cores / 14 GB RAM) on Microsoft Azure, with one silo per VM:
 
 * A grain will handle a maximum of 1,000 requests per second.
 * A silo will handle a maximum of 10,000 requests per second.
