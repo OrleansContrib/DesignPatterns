@@ -10,7 +10,7 @@ Pub/Sub, Events
 
 ## Motivation
 
-The observer pattern is a well known software design pattern in which an object, called the subject, maintains a list of interested parties, called observers, and notifies them automatically of any state changes, usually by calling one of their methods. Because this pattern is so well established, Orleans supports it natively, along with helper classes to aid implementation. 
+The observer pattern is a well known software design pattern in which an object, called the subject, maintains a list of interested parties, called observers, and notifies them automatically of any state changes, usually by calling one of their methods. Because this pattern is so well established, Orleans supports the capability natively, along with a helper class to assist implementation. 
 
 ## Applicability
 
@@ -50,6 +50,58 @@ If the observer is not a grain, it must first create a local C# class that imple
 
 
 ## Sample Code
+
+The actual notification is the StuffUpdate() method on the IGrainObserver derived IObserve interface
+
+```cs
+public interface IObserve : Orleans.IGrainObserver
+{
+    void StuffUpdate(int data);
+}
+```
+
+The source grain allows subscriber to register for notifications, using the ObserverSubscriptionManager<IObserve> helper class 
+
+```cs
+public Task SubscribeForUpdates(IObserve subscriber)
+{
+    // add new subscriber to list of subscribers
+    subscribers.Subscribe(subscriber);
+    return TaskDone.Done;
+}
+```
+
+The source grain send out notifications as and when, using the ObserverSubscriptionManager<IObserve> helper class to dispatch the messages 
+
+```cs
+private Task SendOutUpdates(object _)
+{
+    subscribers.Notify( s => s.StuffUpdate(DateTime.Now.Millisecond));
+
+    return TaskDone.Done;
+}
+```
+
+The observer must define which class or grain is to receive the notifications 
+
+```cs
+private class TheObserver : IObserve
+{
+    public void StuffUpdate(int data)
+    {
+        Console.WriteLine("New stuff has happened: {0}", data);
+    }
+} 
+```
+
+The observer must then register this sink
+
+```cs
+var theObserver = new TheObserver();
+var obj = ObserveFactory.CreateObjectReference(theObserver).Result; 
+grain.SubscribeForUpdates(obj);
+```
+
 
 ## Known Issues
 
