@@ -51,12 +51,12 @@ If the observer is not a grain, it must first create a local C# class that imple
 
 ## Sample Code
 
-The actual notification is the StuffUpdate() method on the IGrainObserver derived IObserve interface
+The actual notification is the Update() method on the IGrainObserver derived IObserve interface
 
 ```cs
 public interface IObserve : Orleans.IGrainObserver
 {
-    void StuffUpdate(int data);
+    void Update(int data);
 }
 ```
 
@@ -70,12 +70,12 @@ public Task SubscribeForUpdates(IObserve subscriber)
 }
 ```
 
-The source grain send out notifications as and when, using the ObserverSubscriptionManager<IObserve> helper class to dispatch the messages 
+The source grain send out notifications as and when, using the ObserverSubscriptionManager<<IObserve>> helper class to dispatch the messages 
 
 ```cs
-private Task SendOutUpdates(object _)
+private Task SendOutUpdates()
 {
-    subscribers.Notify( s => s.StuffUpdate(DateTime.Now.Millisecond));
+    subscribers.Notify( s => s.Update(latestData));
 
     return TaskDone.Done;
 }
@@ -86,9 +86,9 @@ The observer must define which class or grain is to receive the notifications
 ```cs
 private class TheObserver : IObserve
 {
-    public void StuffUpdate(int data)
+    public void Update(int latestData)
     {
-        Console.WriteLine("New stuff has happened: {0}", data);
+        Console.WriteLine("New stuff has happened: {0}", latestData);
     }
 } 
 ```
