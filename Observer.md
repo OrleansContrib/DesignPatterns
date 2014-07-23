@@ -18,14 +18,21 @@ You would use the Observer pattern when want a grain to allow subscribers to reg
 
 ## Structure
 
+![observer structure diagram](images/observer-structure.png)
+
 ## Participants
 
-The subject (aka observed) grain
+The subject (aka observed, source) grain
 
-The observer 
+The observer (aka watcher, sink) grain or class
 
 
 ## Collaborations
+
+The source grain will notify all observers via an interface method as and when it has updates and information it wishes to share.  
+
+The observer must explicitly set up a subscription when it wishes to receive updates, providing a link to itself if it is a grain, or a proxy if it is not a grain. It should also explicitly cancel the subscription when it no longer requires updates.    
+
 
 ## Consequences
 
