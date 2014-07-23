@@ -76,7 +76,6 @@ The source grain send out notifications as and when, using the ObserverSubscript
 private Task SendOutUpdates()
 {
     subscribers.Notify( s => s.Update(latestData));
-
     return TaskDone.Done;
 }
 ```
