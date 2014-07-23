@@ -60,12 +60,11 @@ public interface IObserve : Orleans.IGrainObserver
 }
 ```
 
-The source grain allows subscriber to register for notifications, using the ObserverSubscriptionManager<IObserve> helper class 
+The source grain allows subscriber to register for notifications, using the ObserverSubscriptionManager<<IObserve>> helper class 
 
 ```cs
 public Task SubscribeForUpdates(IObserve subscriber)
 {
-    // add new subscriber to list of subscribers
     subscribers.Subscribe(subscriber);
     return TaskDone.Done;
 }
