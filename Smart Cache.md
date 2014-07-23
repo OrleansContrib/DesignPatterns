@@ -19,7 +19,7 @@ Use the Smart Cache pattern in the following situations:
 * You have a storage system (such as a database) which is introducing an unacceptable latency to your system.
 * Or you have a storage system which cannot handle the number of requests per second required by your system.
 * Or you have a system which is predominantly read, rather than write.
-* Or you have a system which has a high transaction rate for writes, and you can accept a an increased risk in data loss.
+* Or you have a system which has a high transaction rate for writes, and you can accept an increased risk in data loss.
 * You have a system which uses data in a document-orientated approach, rather than by composing queries.
 
 ## Structure

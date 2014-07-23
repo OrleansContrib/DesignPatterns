@@ -57,6 +57,7 @@ public interface ITargetGrain : IGrain
 Dispatcher Grain interface:
 
 ```cs
+[StatelessWorker]
 public interface IDispatcherGrain : IGrain
 {
     Task Send(Tuple<int, string>[] messages);
