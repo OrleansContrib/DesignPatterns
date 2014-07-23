@@ -2,7 +2,7 @@
 
 ## Intent
 
-Decouple the rhythm of grain interactions from external input
+Decouple the rhythm of grain interactions from external input using timers
 
 ## Also Known As
 
