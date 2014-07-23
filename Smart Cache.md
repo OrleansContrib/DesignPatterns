@@ -2,7 +2,7 @@
 
 ## Intent
 
-A performance optimization which uses Orleans as a distributed caching system in front of a storage system. Allows reads to be served from memory, and writes to be optionally buffered.
+A performance optimization which uses Orleans as a distributed caching system in front of a storage system. Allows reads to be served from memory, and provides the option for buffering writes.
 
 ## Also Known As
 
@@ -38,13 +38,13 @@ Use the Smart Cache pattern in the following situations:
 ## Collaborations
 
 * The 'Client Code' calls the 'Cache Grain' to read and write values stored in the 'Database'.
-* When the 'Cache Grain' is activated, it loads the record from it's primary key from the 'Database' and stores it in memory.
+* When the 'Cache Grain' activates, it loads the record from it's primary key from the 'Database' and stores it in memory.
 * When 'Client Code' sends a read operation to the 'Cache Grain', the 'Cache Grain' returns the value from memory.
-* When the 'Client Code' sends a write operation to the 'Cache Grain' it can either pass the write through immediately to the 'Database', or buffer the write, and perform the write to the database on a timer. This means the 'Database' and the cache can become out of step, and the chance of data loss is increased, but will reduce write transactions to the 'Database'.
+* When the 'Client Code' sends a write operation to the 'Cache Grain' it can either pass the write through immediately to the 'Database', or buffer the write, and perform the write to the database on a timer. This means the 'Database' and the cache can become out of step. The chance of data loss increases, but will reduce write transactions to the 'Database'.
 
 ## Consequences
 
-* __Read hits to the system are fast__ as the data is held in memory.
+* __Read hits to the system are fast__ as the grain holds the data in memory.
 * __Writes to the system can be buffered__ at the cost of increased chance of data loss.
 * __Using Orleans Persistence Providers could reduce development time__ as the data access code is already provided.
 
@@ -127,7 +127,7 @@ Note the implementations use a Storage Provider to write to the database.
 
 ## Known Issues
 
-* Queries (such as aggregates, filters and joins) cannot be cached easily, as it is hard to know when they have been invalidated. Therefore the cache is suitable for records by record access more so than a querying system.
+* Queries (such as aggregates, filters and joins) cannot easily be cached, as it is hard to know when they have been invalidated. Therefore the cache is suitable for records by record access more so than a querying system.
 * In case of cache misses, the cache introduces a latency, which will slow down the system.
 * If writes are buffered, there is an increased risk of data loss, of the silo terminates unexpectedly before an outstanding write it committed.
 
