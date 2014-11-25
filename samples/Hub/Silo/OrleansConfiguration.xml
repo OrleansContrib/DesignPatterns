@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrleansConfiguration xmlns="urn:orleans">
+  <Globals>
+    <Application>
+      <Defaults>
+        <Deactivation AgeLimit="1m"/>
+      </Defaults>
+      <GrainType Type="Sample.ChildHubGrain">
+        <Deactivation AgeLimit="24hr"/>
+      </GrainType>      
+      <GrainType Type="Sample.HubGrain">
+        <Deactivation AgeLimit="24hr"/>
+      </GrainType>
+    </Application>
+    <BootstrapProviders>
+      <Provider Type="Sample.HubGateway" Name="BootHub" PoolSize="100" LoadBalance="RoundRobin"/>
+    </BootstrapProviders>    
+    <Liveness LivenessType="AzureTable" />
+  </Globals>
+	<Defaults>
+    <Tracing DefaultTraceLevel="Info" TraceToConsole="true" TraceToFile="{0}-{1}.log" >
+    </Tracing>
+	</Defaults>
+</OrleansConfiguration>
