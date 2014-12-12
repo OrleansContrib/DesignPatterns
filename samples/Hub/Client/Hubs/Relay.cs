@@ -82,9 +82,11 @@ namespace Sample.Hubs
 
         static string Format(Notification notification, string hub)
         {
-            var latency = (DateTime.Now - notification.Time).TotalSeconds;
-            return string.Format("{0} published {1} at {2} via {4}. Latency: {3} s",
-                                 notification.Sender, notification.Id, notification.Time, latency, hub);
+            var @event = notification.Event;
+            var latency = (DateTime.Now - notification.Received).TotalSeconds;
+
+            return string.Format("{0} published {1} on {2} via {4}. Latency: {3} s",
+                                 @event.Sender, @event.Id, @event.Time, latency, hub);
         }
     }
 }

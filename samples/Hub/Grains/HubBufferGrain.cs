@@ -50,17 +50,9 @@ namespace Sample
             return hub.Publish(notifications);
         }
 
-        public Task Add(Notification notification)
+        public Task Publish(Event @event)
         {
-            buffer.Enqueue(notification);
-            return TaskDone.Done;
-        }
-
-        public Task Add(Notification[] notifications)
-        {
-            foreach (var notification in notifications)
-                buffer.Enqueue(notification);
-
+            buffer.Enqueue(new Notification(@event, DateTime.Now));
             return TaskDone.Done;
         }
     }

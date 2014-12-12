@@ -13,9 +13,8 @@ namespace Sample
     public interface IHubBuffer : IGrainWithStringKey
     {
         Task Init();
-
-        Task Add(Notification[] notifications);
-        Task Add(Notification notification);
+        
+        Task Publish(Event e);
     }
 
     [ExtendedPrimaryKey]
@@ -26,7 +25,7 @@ namespace Sample
         
         Task Subscribe(IHubObserver observer);
         Task Unsubscribe(IHubObserver observer);
-
+        
         Task Publish(Notification[] notifications);
     }
 
@@ -37,17 +36,31 @@ namespace Sample
 
     [Immutable]
     [Serializable]
-    public class Notification
+    public class Event
     {
         public readonly string Sender;
         public readonly long Id;
         public readonly DateTime Time;
 
-        public Notification(string sender, long id, DateTime time)
+        public Event(string sender, long id, DateTime time)
         {
             Sender = sender;
             Id = id;
             Time = time;
+        }
+    }
+
+    [Immutable]
+    [Serializable]
+    public class Notification
+    {
+        public readonly Event Event;
+        public readonly DateTime Received;
+
+        public Notification(Event e, DateTime received)
+        {
+            Event = e;
+            Received = received;
         }
     }
 }

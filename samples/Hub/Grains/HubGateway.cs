@@ -51,14 +51,9 @@ namespace Sample
             throw new ApplicationException("Unknown load-balance strategy: " + strategy);
         }
 
-        public static Task Publish(Notification notification)
+        public static Task Publish(Event e)
         {
-            return ChooseNextLocalBuffer().Add(notification);
-        }
-
-        public static Task Publish(Notification[] notifications)
-        {
-            return ChooseNextLocalBuffer().Add(notifications);
+            return ChooseNextLocalBuffer().Publish(e);
         }
 
         static IHubBuffer ChooseNextLocalBuffer()

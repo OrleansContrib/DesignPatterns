@@ -8,6 +8,8 @@ namespace Sample
 {
     public class PublisherGrain : Grain, IPublisher
     {
+        static readonly Random rand = new Random();
+
         Task IPublisher.Init()
         {
             return TaskDone.Done;
@@ -15,20 +17,20 @@ namespace Sample
 
         public override Task ActivateAsync()
         {
-            RegisterTimer(Publish, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+            RegisterTimer(Publish, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(rand.Next(3, 10)));
             return TaskDone.Done;
         }
 
         Task Publish(object arg)
         {
-            return HubGateway.Publish(Notification());
+            return HubGateway.Publish(Event());
         }
 
-        Notification Notification()
+        Event Event()
         {
             var senderId = ThisId() + "##" + HubGateway.LocalAddress();
-            var notificationId = DateTime.Now.Ticks ^ ThisId();
-            return new Notification(senderId, notificationId, DateTime.Now);
+            var eventId = DateTime.Now.Ticks ^ ThisId();
+            return new Event(senderId, eventId, DateTime.Now);
         }
 
         long ThisId()
