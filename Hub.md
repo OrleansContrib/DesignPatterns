@@ -71,7 +71,7 @@ See included sample at [samples/Hub](samples/Hub)
 - All client requests could only be made after first consulting Orleans' management infrastructure. 
 
 ## Related Patterns
-[Observer](Observer.md)
-[Reduce](Reduce.md)
-[Cadence](Cadence.md)
-[Dispatcher](Dispatcher.md)
+- [Observer](Observer.md)
+- [Reduce](Reduce.md)
+- [Cadence](Cadence.md)
+- [Dispatcher](Dispatcher.md)
