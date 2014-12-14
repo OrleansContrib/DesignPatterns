@@ -2,7 +2,7 @@
 
 ## Intent
 
-Provides clients with a single well-known observable endpoint by channeling events from multiple event sources.
+Provides clients with a single well-known publishing endpoint by channeling events from multiple event sources, dramatically simplifying registration and management of transient subscriptions
 
 ## Also Known As
 
@@ -71,5 +71,7 @@ See included sample at [samples/Hub](samples/Hub)
 - All client requests could only be made after first consulting Orleans' management infrastructure. 
 
 ## Related Patterns
+[Observer](Observer.md)
 [Reduce](Reduce.md)
 [Cadence](Cadence.md)
+[Dispatcher](Dispatcher.md)
