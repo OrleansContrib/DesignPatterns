@@ -1,8 +1,8 @@
 ### Prerequisites
 
-* September refresh of Orleans SDK built against Azure SDK 2.4
 * Azure SDK 2.4
 * Azure Compute Emulator v2.4 
+* Preview refresh of [Orleans SDK](https://orleans.codeplex.com/releases/view/134727) built against Azure SDK 2.4
 
 ### How to run
 
