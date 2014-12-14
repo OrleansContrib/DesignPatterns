@@ -8,12 +8,9 @@ using Orleans.Placement;
 
 namespace Sample
 {
-    [ExtendedPrimaryKey]
-    [PreferLocalPlacement]
-    public interface IHubBuffer : IGrainWithStringKey
+    [StatelessWorker]
+    public interface IHubBuffer : IGrainWithIntegerKey
     {
-        Task Init();
-        
         Task Publish(Event e);
     }
 
