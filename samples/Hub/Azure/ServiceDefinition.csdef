@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-06.2.4">
+  <WorkerRole name="Silo" vmsize="Large">
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="DataConnectionString" />
+    </ConfigurationSettings>
+    <LocalResources>
+      <LocalStorage name="LocalStoreDirectory" cleanOnRoleRecycle="false" />
+    </LocalResources>
+    <Endpoints>
+      <InternalEndpoint name="OrleansSiloEndpoint" protocol="tcp" port="11111" />
+      <InternalEndpoint name="OrleansProxyEndpoint" protocol="tcp" port="30000" />
+    </Endpoints>
+    <Startup>
+      <Task commandLine="CounterControl.exe" executionContext="elevated" taskType="simple" />
+    </Startup>
+  </WorkerRole>
+  <WebRole name="Client" vmsize="Medium">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="DataConnectionString" />
+    </ConfigurationSettings>
+  </WebRole>
+</ServiceDefinition>

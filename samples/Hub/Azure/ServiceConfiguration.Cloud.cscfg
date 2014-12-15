@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" schemaVersion="2014-06.2.4" osFamily="3" osVersion="*" serviceName="Azure">
+  <Role name="Silo">
+    <Instances count="3" />
+    <ConfigurationSettings>
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=MYACCOUNTNAME;AccountKey=MYACCOUNTKEY" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=MYACCOUNTNAME;AccountKey=MYACCOUNTKEY" />
+    </ConfigurationSettings>
+  </Role>
+  <Role name="Client">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=MYACCOUNTNAME;AccountKey=MYACCOUNTKEY" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
