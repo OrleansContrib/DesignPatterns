@@ -2,7 +2,7 @@
 
 ## Intent
 
-Provides a hierarchical structure to aggregate a value stored in many grains, which would unachievable with a fan-out.
+Provides a hierarchical structure to aggregate a value stored in many grains, which would be unachievable with a fan-out.
 
 ## Also Known As
 
