@@ -120,7 +120,7 @@ public class SubTotalGrain : Orleans.GrainBase, ISubtotalGrain
 }
 ```
 
-Total Grian Interface
+Total Grain Interface
 
 ```cs
 public interface ITotalGrain : Orleans.IGrain
