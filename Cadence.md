@@ -41,7 +41,7 @@ The timer is typically set up in the grain's ActivateAsync() call
 ```cs
 public override Task ActivateAsync()
 {
-    RegisterTimer(SendUpdate, null, TimeSpan.FromSeconds(1, TimeSpan.FromSeconds(5));
+    RegisterTimer(SendUpdate, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(5));
 
 ```
 
